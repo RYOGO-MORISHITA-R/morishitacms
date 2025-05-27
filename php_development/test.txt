@@ -1,0 +1,95 @@
+./laravel-app に Laravel を配置（初回のみ）
+docker compose run --rm web composer create-project laravel/laravel laravel-app
+
+
+docker compose up -d
+
+http://localhost:8010
+
+//再起動
+docker compose up -d --build
+
+
+
+# セッション用マイグレーションファイルを生成
+docker compose exec web php artisan session:table
+
+# マイグレーションを実行してDBに反映
+docker compose exec web php artisan migrate
+
+
+
+# ログインアカウント
+ryogo@gmail.com
+password123
+
+
+INSERT INTO users (name, email, password, created_at, updated_at)
+VALUES (
+  'りょうご',
+  'ryogo@gmail.com',
+  '$2y$10$KsyaU5Sba8uWGb9sNqUM.O2rRCg5mjG6Fk3eG0Y3QIMmhmYPR7Fn2',
+  NOW(),
+  NOW()
+);
+
+bcryptをつかってハッシュ化しないとパスワード登録できないようにしている
+
+
+docker compose exec web composer install
+docker compose exec web php artisan config:clear
+docker compose exec web php artisan view:clear
+docker compose exec web php artisan route:clear
+docker compose exec web php artisan optimize
+
+
+
+CREATE TABLE templates (
+    tmpId INT AUTO_INCREMENT PRIMARY KEY,
+    tmpcode VARCHAR(50) NOT NULL UNIQUE,
+    tmpname VARCHAR(100) NOT NULL,
+    tmphtml MEDIUMTEXT NOT NULL,
+    tmpcreatedatetime DATETIME DEFAULT CURRENT_TIMESTAMP,
+    tmpupdatedatetime DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    userId INT NOT NULL,
+    cssId INT,
+    jsId INT
+);
+
+
+
+CREATE TABLE csses (
+    cssId INT AUTO_INCREMENT PRIMARY KEY,
+    userId INT NOT NULL,
+    cssCode VARCHAR(100) NOT NULL,
+    cssName VARCHAR(255) NOT NULL,
+    cssContent TEXT NOT NULL,
+    cssCreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    cssUpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+);
+
+
+
+CREATE TABLE javascripts (
+    jsId INT AUTO_INCREMENT PRIMARY KEY,
+    userId INT NOT NULL,
+    jsCode VARCHAR(100) NOT NULL,
+    jsName VARCHAR(255) NOT NULL,
+    jsContent TEXT NOT NULL,
+    jsCreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    jsUpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE members (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    birthday DATE,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    login_id VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    joined_at DATETIME NOT NULL,
+    withdrawn_at DATETIME NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
