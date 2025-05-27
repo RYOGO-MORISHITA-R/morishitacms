@@ -1,0 +1,28 @@
+{% extends 'base_admin.html' %}
+{% load static %}
+
+{% block title %}チャット{% endblock %}
+
+{% block content %}
+<h1>チャット</h1>
+
+<div class="chat-box">
+  {% for message in chat_history %}
+    {% if message.role == "user" %}
+      <div class="message user">
+        <div class="bubble user-bubble">{{ message.content }}</div>
+      </div>
+    {% else %}
+      <div class="message assistant">
+        <img src="{% static 'chatrobo.png' %}" class="robot-icon" alt="Robot">
+        <div class="bubble assistant-bubble">{{ message.content }}</div>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+<form method="post" class="chat-form">
+    {% csrf_token %}
+    <input type="text" name="message" placeholder="メッセージを入力..." class="chat-input">
+    <button type="submit" class="chat-send">送信</button>
+</form>
+{% endblock %}

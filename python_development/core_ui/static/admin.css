@@ -1,0 +1,169 @@
+/*-------------------
+共通
+-------------------*/
+body {
+    display: flex;
+    margin: 0;
+    font-family: sans-serif;
+}
+aside {
+    position: fixed;
+    width: 280px;
+    background: #2c3e50;
+    color: white;
+    height: 100vh;
+    padding: 20px 0;
+    flex-shrink: 0;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+aside h2 {
+    margin-left: 20px;
+}
+main {
+    margin-left: 280px;
+    padding: 20px;
+    padding-bottom: 80px;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;                  /* ← 追加: 横幅を親要素に合わせる */
+}
+ul li {
+    width: 100%;  /* ← 追加 */
+}
+ul li a {
+    display: block;
+    width: 100%;                  /* ← 追加: 横幅を親要素に合わせる */
+    padding: 10px 20px;           /* ← 左右に余白を追加 */
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    box-sizing: border-box;     /* ← はみ出し防止 */
+}
+
+/* ホバー時の色変更 */
+ul li a:hover {
+    background-color: #3d5a73;
+}
+
+/* 現在表示中のページに対応するリンク */
+ul li a.active {
+    background-color: #1c2f41;
+    font-weight: bold;
+}
+
+/*-------------------
+チャット
+-------------------*/
+.chat-box {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.message {
+    display: flex;
+    align-items: flex-end;
+    max-width: 70%;
+}
+
+.message.user {
+    justify-content: flex-end;
+    align-self: flex-end;
+}
+
+.message.assistant {
+    justify-content: flex-start;
+    align-self: flex-start;
+}
+
+.robot-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+/* 吹き出しベース */
+.bubble {
+    padding: 10px 15px;
+    border-radius: 15px;
+    position: relative;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+/* ユーザー吹き出し（右） */
+.user-bubble {
+    background-color: #4a76d1;
+    color: white;
+    border-bottom-right-radius: 0;
+}
+
+.user-bubble::after {
+    content: "";
+    position: absolute;
+    right: -10px;
+    top: 10px;
+    border-width: 10px 0 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent transparent #4a76d1;
+}
+
+/* アシスタント吹き出し（左） */
+.assistant-bubble {
+    background-color: #c8ddf1;
+    color: black;
+    border-bottom-left-radius: 0;
+}
+
+.assistant-bubble::after {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 10px;
+    border-width: 10px 10px 10px 0;
+    border-style: solid;
+    border-color: transparent #c8ddf1 transparent transparent;
+}
+
+.chat-form {
+    position: fixed;
+    bottom: 0;
+    left: 280px; /* メニュー分ずらす */
+    right: 0;
+    background-color: #fff;
+    display: flex;
+    padding: 10px 20px;
+    border-top: 1px solid #ccc;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+    z-index: 10;
+}
+.chat-input {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    outline: none;
+    margin-right: 10px;
+}
+
+.chat-send {
+    background-color: #4a76d1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.chat-send:hover {
+    background-color: #3a64b8;
+}

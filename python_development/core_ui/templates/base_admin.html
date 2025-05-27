@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}管理画面{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'admin.css' %}">
+</head>
+<body>
+    <aside>
+        <h2>管理メニュー</h2>
+    <ul>
+        <li><a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">ホーム</a></li>
+        <li><a href="{% url 'chat' %}" class="{% if request.path == '/chat/' %}active{% endif %}">チャット</a></li>
+    </ul>
+          
+    </aside>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

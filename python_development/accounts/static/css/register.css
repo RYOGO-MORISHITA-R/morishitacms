@@ -1,0 +1,84 @@
+body {
+  font-family: sans-serif;
+  background: #f9f9f9;
+  padding: 20px;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.register-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 6px;
+  max-width: 700px;
+  margin: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  vertical-align: middle;
+}
+
+th {
+  background: #f4f4f4;
+  text-align: left;
+  width: 200px;
+}
+
+.required {
+  color: white;
+  background: #e60033;
+  padding: 2px 5px;
+  font-size: 0.8em;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="file"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.submit {
+  background-color: #4a76d1;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  margin-right: 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.reset {
+  background-color: #7B8EB5;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}

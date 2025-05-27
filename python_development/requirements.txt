@@ -1,0 +1,21 @@
+# === ライブラリ依存関係の調整 ===
+numpy==1.24.4
+
+# === Webフレームワーク ===
+Django==5.0.4
+
+# === API連携系 ===
+openai>=1.0.0
+requests>=2.30.0,<3.0.0
+
+# === 環境変数読込 ===
+python-dotenv==1.0.1
+
+# === DB ===
+mysqlclient>=2.2.0
+
+# === 顔認証 ===
+face_recognition==1.3.0
+# dlib==19.24.0  ← face_recognition が依存しているのでコメントでもOK
+#opencv-python==4.8.0.76
+opencv-python-headless==4.8.0.76

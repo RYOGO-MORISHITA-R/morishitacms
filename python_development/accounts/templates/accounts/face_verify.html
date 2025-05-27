@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>顔認証</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/face_verify.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="verify-box">
+      <h2>顔認証</h2>
+
+      {% if error %}
+        <p class="error">{{ error }}</p>
+      {% endif %}
+
+      <video id="video" autoplay></video>
+      <canvas id="canvas" style="display:none;"></canvas>
+
+      <form id="verifyForm" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="image" id="imageInput">
+        <button type="submit" class="btn">本人確認</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const video = document.getElementById("video");
+    const canvas = document.getElementById("canvas");
+    const imageInput = document.getElementById("imageInput");
+    const form = document.getElementById("verifyForm");
+
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        video.srcObject = stream;
+      });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const context = canvas.getContext("2d");
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      imageInput.value = canvas.toDataURL("image/jpeg");
+      form.submit();
+    });
+  </script>
+</body>
+</html>
+

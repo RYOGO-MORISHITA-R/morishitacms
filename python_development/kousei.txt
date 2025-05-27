@@ -1,0 +1,28 @@
+python_development/
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+└──myproject/               ← startproject が作る
+    ├── manage.py
+    ├── myproject/
+    │   ├── settings.py     ← Djangoプロジェクトの「設定ファイル」：サーバーの動作、データベース、認証、アプリ、テンプレートなどの設定
+    │   ├── urls.py         ← URLルーティング設定
+    │   └── ...
+    ├── chatgpt_app/        ← startapp が作る
+    │   ├── views.py        ← 「画面の処理（ロジック）」を書くファイル。画面に何を表示するか、どんなデータを返すかを決める場所。
+    │   ├── models.py
+    │   ├── urls.py         ← URLルーティング設定
+    │   └── ...
+    └── blog_app/           ← 追加で別の機能を作った例
+
+
+
+| 設定項目             | 役割の説明                          |
+| ---------------- | ------------------------------ |
+| `DEBUG`          | True/False で開発モードか本番モードかを切り替える |
+| `ALLOWED_HOSTS`  | 許可するホスト名（本番用）                  |
+| `INSTALLED_APPS` | 利用するアプリ一覧（後述）（フォルダ名）                  |
+| `DATABASES`      | DB接続情報（SQLite, MySQLなど）        |
+| `TEMPLATES`      | HTMLテンプレートの場所やエンジン設定           |
+| `STATIC_URL`     | 静的ファイル（CSS/JSなど）のURLパス         |
+| `MIDDLEWARE`     | 通信の前後に実行される共通処理（ログイン確認など）      |
